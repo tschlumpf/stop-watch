@@ -1,0 +1,22 @@
+{
+  "name": "stop-watch",
+  "version": "1.0.0",
+  "description": "simple stop watch",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run tests.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/tschlumpf/stop-watch.git"
+  },
+  "keywords": [
+    "time"
+  ],
+  "author": "tschlumpf",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/tschlumpf/stop-watch/issues"
+  },
+  "homepage": "https://github.com/tschlumpf/stop-watch#readme"
+}
