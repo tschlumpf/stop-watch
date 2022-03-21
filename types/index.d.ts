@@ -1,4 +1,7 @@
-export = StopWatch;
+declare module 'stop-watch'{
+    export = StopWatch;
+};
+
 declare class StopWatch {
     constructor(title: string, options: Object|Function);
     title: string;
@@ -10,4 +13,3 @@ declare class StopWatch {
     stopStart(name: string, callback: Function): void;
     stop(callback: string): void;
 }
-//# sourceMappingURL=index.d.ts.map
