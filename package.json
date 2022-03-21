@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/tschlumpf/stop-watch/issues"
   },
-  "homepage": "https://github.com/tschlumpf/stop-watch#readme"
+  "homepage": "https://github.com/tschlumpf/stop-watch#readme",
+  "devDependencies": {
+    "typescript": "^4.6.2"
+  }
 }
