@@ -4,7 +4,7 @@
     "description": "simple stop watch",
     "main": "index.js",
     "scripts": {
-        "test": "npm run tests.js"
+        "test": "node tests.js"
     },
     "files": [
         "index.js",
