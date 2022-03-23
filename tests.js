@@ -5,7 +5,7 @@ let cntPassed = 0;
 let cntFailed = 0;
 let test = 0;
 
-main()
+main();
 async function main() {
     test++;
     try {
