@@ -11,5 +11,5 @@ declare class StopWatch {
     name: string;
     startTime: Date;
     stopStart(name: string, callback: Function): void;
-    stop(callback: string): void;
+    stop(callback: Function): void;
 }
