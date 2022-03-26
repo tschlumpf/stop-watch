@@ -2,13 +2,13 @@
     "name": "stop-watch",
     "version": "2.0.0",
     "description": "simple stop watch",
-    "main": "index.ts",
+    "main": "index.js",
     "scripts": {
         "test": "tsc tests.ts && node tests.js"
     },
     "files": [
         "index.js",
-        "types/"
+        "dist/*"
     ],
     "types": "dist/index.d.ts",
     "repository": {
