@@ -1,16 +1,16 @@
 {
     "name": "stop-watch",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "description": "simple stop watch",
-    "main": "index.js",
+    "main": "index.ts",
     "scripts": {
-        "test": "node tests.js"
+        "test": "tsc tests.ts && node tests.js"
     },
     "files": [
         "index.js",
-        "types/index.d.ts"
+        "types/"
     ],
-    "types": "types/index.d.ts",
+    "types": "dist/index.d.ts",
     "repository": {
         "type": "git",
         "url": "git+ssh://git@github.com/tschlumpf/stop-watch.git"
@@ -26,5 +26,8 @@
     "homepage": "https://github.com/tschlumpf/stop-watch#readme",
     "devDependencies": {
         "typescript": "^4.6.2"
+    },
+    "dependencies": {
+        "@types/node": "^17.0.23"
     }
 }

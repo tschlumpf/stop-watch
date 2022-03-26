@@ -1,63 +1,60 @@
 "use strict";
-
-class StopWatch {
-    constructor(title, options) {
-        if (typeof (title) !== "string") throw new Error("no title was given.");
+exports.__esModule = true;
+exports.StopWatch = void 0;
+var StopWatch = /** @class */ (function () {
+    function StopWatch(title, options) {
+        if (typeof (title) !== "string")
+            throw new Error("no title was given.");
         this.title = title;
-
+        this.name = "";
+        this.showErrors = true;
         if (typeof (options) === "object") {
             this.defaultCallback = options.defaultCallback;
-            this.showErrors = options.showErrors || true;
-        } else if (typeof (options) === "function") {
+            this.showErrors = options.showErrors || this.showErrors;
+        }
+        else if (typeof (options) === "function") {
             this.defaultCallback = options;
         }
     }
-
-    start(name) {
+    StopWatch.prototype.start = function (name) {
         this.name = name;
-
         if (this.startTime && this.showErrors) {
             console.error("stopwatch is started although it is already running. it will be restarted.");
         }
         this.startTime = new Date();
-    }
-
-    stopStart(name, callback) {
-        if (typeof (name) !== "string") throw new Error("no proper name was given.");
-
-        this.stop(callback, false);
-        this.start(name, false);
-    }
-
-    stop(callback) {
+    };
+    StopWatch.prototype.stopStart = function (name, callback) {
+        if (typeof (name) !== "string")
+            throw new Error("no proper name was given.");
+        this.stop(callback);
+        this.start(name);
+    };
+    StopWatch.prototype.stop = function (callback) {
         if (!this.startTime) {
-            if (this.showErrors) console.error("the stopwatch was stopped but never started.");
+            if (this.showErrors)
+                console.error("the stopwatch was stopped but never started.");
             return;
         }
-
-        const duration = new Date() - this.startTime;
+        var duration = new Date().getTime() - this.startTime.getTime();
         this.startTime = null;
-
-        const result = {
+        var result = {
             title: this.title,
             name: this.name,
             duration: {
                 sec: duration / 1000,
-                ms: duration,
-            },
+                ms: duration
+            }
         };
-
         if (typeof (callback) === "function") {
             callback(result);
             return;
         }
-
         if (this.defaultCallback) {
             this.defaultCallback(result);
             return;
         }
-        console.log(`${this.title} - "${this.name}" took ${duration.sec}s`);
-    }
-}
-
-module.exports = StopWatch;
+        console.log("".concat(result.title, " - \"").concat(result.name, "\" took ").concat(result.duration.sec, "s"));
+    };
+    return StopWatch;
+}());
+exports.StopWatch = StopWatch;
