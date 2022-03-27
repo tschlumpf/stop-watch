@@ -1,4 +1,4 @@
-type StopwatchResult = {
+export type StopwatchResult = {
   title: string,
   name: string,
   duration: {
@@ -7,11 +7,11 @@ type StopwatchResult = {
   },
 }
 
-interface StopwatchCallback {
+export interface StopwatchCallback {
   (result: StopwatchResult): void;
 }
 
-type StopwatchOptions = {
+export type StopwatchOptions = {
   defaultCallback: StopwatchCallback,
   showErrors: boolean
 }

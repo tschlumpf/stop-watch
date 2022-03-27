@@ -1,4 +1,4 @@
-declare type StopwatchResult = {
+export declare type StopwatchResult = {
     title: string;
     name: string;
     duration: {
@@ -6,10 +6,10 @@ declare type StopwatchResult = {
         ms: number;
     };
 };
-interface StopwatchCallback {
+export interface StopwatchCallback {
     (result: StopwatchResult): void;
 }
-declare type StopwatchOptions = {
+export declare type StopwatchOptions = {
     defaultCallback: StopwatchCallback;
     showErrors: boolean;
 };
