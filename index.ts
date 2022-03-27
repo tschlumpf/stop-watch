@@ -1,4 +1,4 @@
-type Result = {
+type StopwatchResult = {
   title: string,
   name: string,
   duration: {
@@ -7,19 +7,19 @@ type Result = {
   },
 }
 
-interface Callback {
-  (result: Result): void;
+interface StopwatchCallback {
+  (result: StopwatchResult): void;
 }
 
-type Options = {
-  defaultCallback: Callback,
+type StopwatchOptions = {
+  defaultCallback: StopwatchCallback,
   showErrors: boolean
 }
 
 class StopWatch {
   title: string;
 
-  defaultCallback: Callback | undefined;
+  defaultCallback: StopwatchCallback | undefined;
 
   showErrors: boolean;
 
@@ -27,7 +27,7 @@ class StopWatch {
 
   startTime: Date | null | undefined;
 
-  constructor(title: string, options?: Callback | Partial<Options>) {
+  constructor(title: string, options?: StopwatchCallback | Partial<StopwatchOptions>) {
     if (typeof (title) !== 'string') throw new Error('no title was given.');
     this.title = title;
     this.name = '';
@@ -50,14 +50,14 @@ class StopWatch {
     this.startTime = new Date();
   }
 
-  stopStart(name: string, callback?: Callback) {
+  stopStart(name: string, callback?: StopwatchCallback) {
     if (typeof (name) !== 'string') throw new Error('no proper name was given.');
 
     this.stop(callback);
     this.start(name);
   }
 
-  stop(callback?: Callback) {
+  stop(callback?: StopwatchCallback) {
     if (!this.startTime) {
       if (this.showErrors) throw new Error('the stopwatch was stopped but never started.');
       return;
@@ -66,7 +66,7 @@ class StopWatch {
     const duration = new Date().getTime() - this.startTime.getTime();
     this.startTime = null;
 
-    const result: Result = {
+    const result: StopwatchResult = {
       title: this.title,
       name: this.name,
       duration: {
