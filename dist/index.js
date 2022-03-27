@@ -1,8 +1,13 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.StopWatch = void 0;
-var StopWatch = /** @class */ (function () {
-    function StopWatch(title, options) {
+class StopWatch {
+    title;
+    defaultCallback;
+    showErrors;
+    name;
+    startTime;
+    constructor(title, options) {
         if (typeof (title) !== "string")
             throw new Error("no title was given.");
         this.title = title;
@@ -16,34 +21,34 @@ var StopWatch = /** @class */ (function () {
             this.defaultCallback = options;
         }
     }
-    StopWatch.prototype.start = function (name) {
+    start(name) {
         this.name = name;
         if (this.startTime && this.showErrors) {
             console.error("stopwatch is started although it is already running. it will be restarted.");
         }
         this.startTime = new Date();
-    };
-    StopWatch.prototype.stopStart = function (name, callback) {
+    }
+    stopStart(name, callback) {
         if (typeof (name) !== "string")
             throw new Error("no proper name was given.");
         this.stop(callback);
         this.start(name);
-    };
-    StopWatch.prototype.stop = function (callback) {
+    }
+    stop(callback) {
         if (!this.startTime) {
             if (this.showErrors)
                 console.error("the stopwatch was stopped but never started.");
             return;
         }
-        var duration = new Date().getTime() - this.startTime.getTime();
+        const duration = new Date().getTime() - this.startTime.getTime();
         this.startTime = null;
-        var result = {
+        const result = {
             title: this.title,
             name: this.name,
             duration: {
                 sec: duration / 1000,
-                ms: duration
-            }
+                ms: duration,
+            },
         };
         if (typeof (callback) === "function") {
             callback(result);
@@ -53,8 +58,7 @@ var StopWatch = /** @class */ (function () {
             this.defaultCallback(result);
             return;
         }
-        console.log("".concat(result.title, " - \"").concat(result.name, "\" took ").concat(result.duration.sec, "s"));
-    };
-    return StopWatch;
-}());
+        console.log(`${result.title} - "${result.name}" took ${result.duration.sec}s`);
+    }
+}
 exports.StopWatch = StopWatch;
