@@ -48,14 +48,14 @@ class StopWatch {
         this.startTime = new Date();
     }
 
-    stopStart(name: string, callback: Callback) {
+    stopStart(name: string, callback?: Callback) {
         if (typeof (name) !== "string") throw new Error("no proper name was given.");
 
         this.stop(callback);
         this.start(name);
     }
 
-    stop(callback: Callback) {
+    stop(callback?: Callback) {
         if (!this.startTime) {
             if (this.showErrors) console.error("the stopwatch was stopped but never started.");
             return;
