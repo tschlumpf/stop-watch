@@ -21,8 +21,8 @@ declare class StopWatch {
     startTime: Date | null | undefined;
     constructor(title: string, options?: Options);
     start(name: string): void;
-    stopStart(name: string, callback: Callback): void;
-    stop(callback: Callback): void;
+    stopStart(name: string, callback?: Callback): void;
+    stop(callback?: Callback): void;
 }
 export { StopWatch };
 //# sourceMappingURL=index.d.ts.map

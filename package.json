@@ -7,7 +7,7 @@
         "test": "tsc && node ./dist/tests.js"
     },
     "files": [
-        "index.js",
+        "*",
         "dist/*"
     ],
     "types": "dist/index.d.ts",
@@ -24,9 +24,6 @@
         "url": "https://github.com/tschlumpf/stop-watch/issues"
     },
     "homepage": "https://github.com/tschlumpf/stop-watch#readme",
-    "devDependencies": {
-        "typescript": "^4.6.2"
-    },
     "dependencies": {
         "@types/node": "^17.0.23"
     }
