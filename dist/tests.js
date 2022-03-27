@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 /* eslint-disable no-console */
 const util_1 = require("util");
+// eslint-disable-next-line import/no-unresolved, import/extensions
 const index_1 = require("./index");
 let cntPassed = 0;
 let cntFailed = 0;

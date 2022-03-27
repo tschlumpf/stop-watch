@@ -1,4 +1,4 @@
-declare type Result = {
+declare type StopwatchResult = {
     title: string;
     name: string;
     duration: {
@@ -6,23 +6,23 @@ declare type Result = {
         ms: number;
     };
 };
-interface Callback {
-    (result: Result): void;
+interface StopwatchCallback {
+    (result: StopwatchResult): void;
 }
-declare type Options = {
-    defaultCallback: Callback;
+declare type StopwatchOptions = {
+    defaultCallback: StopwatchCallback;
     showErrors: boolean;
 };
 declare class StopWatch {
     title: string;
-    defaultCallback: Callback | undefined;
+    defaultCallback: StopwatchCallback | undefined;
     showErrors: boolean;
     name: string;
     startTime: Date | null | undefined;
-    constructor(title: string, options?: Callback | Partial<Options>);
+    constructor(title: string, options?: StopwatchCallback | Partial<StopwatchOptions>);
     start(name: string): void;
-    stopStart(name: string, callback?: Callback): void;
-    stop(callback?: Callback): void;
+    stopStart(name: string, callback?: StopwatchCallback): void;
+    stop(callback?: StopwatchCallback): void;
 }
 export { StopWatch };
 //# sourceMappingURL=index.d.ts.map
