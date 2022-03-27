@@ -1,7 +1,3 @@
-declare type Options = Function | {
-    defaultCallback: Function;
-    showErrors: boolean;
-};
 declare type Result = {
     title: string;
     name: string;
@@ -13,13 +9,17 @@ declare type Result = {
 interface Callback {
     (result: Result): void;
 }
+declare type Options = {
+    defaultCallback: Callback;
+    showErrors: boolean;
+};
 declare class StopWatch {
     title: string;
-    defaultCallback: Function | undefined;
+    defaultCallback: Callback | undefined;
     showErrors: boolean;
     name: string;
     startTime: Date | null | undefined;
-    constructor(title: string, options?: Options);
+    constructor(title: string, options?: Callback | Partial<Options>);
     start(name: string): void;
     stopStart(name: string, callback?: Callback): void;
     stop(callback?: Callback): void;
