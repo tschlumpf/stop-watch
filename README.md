@@ -35,6 +35,7 @@ Result:
   duration: {
     sec, //duration in seconds
     ms, //duration in milliseconds
+    ns, //duration in nanoseconds
   }
 }
 ```

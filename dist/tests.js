@@ -1,9 +1,12 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 /* eslint-disable no-console */
 const util_1 = require("util");
 // eslint-disable-next-line import/no-unresolved, import/extensions
-const index_1 = require("./index");
+const index_1 = __importDefault(require("./index"));
 let cntPassed = 0;
 let cntFailed = 0;
 let test = 0;
@@ -17,20 +20,20 @@ function failed() {
     process.exitCode = 1;
     return 'failed';
 }
-function message(_test, result) {
-    if (result == null)
+function message(_test, _result) {
+    if (_test == null)
         throw new Error('missing argument "test"');
-    if (result == null)
+    if (_result == null)
         throw new Error('missing argument "result"');
-    console.log(`test ${_test.toString().padStart(2, ' ')}: ${result ? passed() : failed()}`);
+    console.log(`test ${_test.toString().padStart(2, ' ')}: ${_result ? passed() : failed()}`);
 }
 function isEqual(n, v, tolerance) {
     return Math.abs(v - n) < tolerance;
 }
 async function main() {
-    test += 1;
+    test = 1;
     try {
-        const stopWatch = new index_1.StopWatch('1');
+        const stopWatch = new index_1.default('1');
         stopWatch.start('2');
         await sleep(1000);
         stopWatch.stop(() => message(test, true));
@@ -39,11 +42,11 @@ async function main() {
         console.error(err);
         message(test, false);
     }
-    test += 1;
+    test = 2;
     try {
         const title = 'hello';
         const name = 'timer';
-        const stopWatch = new index_1.StopWatch(title);
+        const stopWatch = new index_1.default(title);
         stopWatch.start(name);
         await sleep(1000);
         stopWatch.stop((result) => {
@@ -58,14 +61,15 @@ async function main() {
         console.error(err);
         message(test, false);
     }
-    test += 1;
+    test = 3;
     try {
-        const stopWatch = new index_1.StopWatch('title');
+        const stopWatch = new index_1.default('title');
         stopWatch.start('name');
         await sleep(1000);
         stopWatch.stop((result) => {
-            if (!isEqual(result.duration.sec * 1000, result.duration.ms, 5))
-                throw Error('ms and sec are not equal.');
+            if (!isEqual(result.duration.sec * 1000, result.duration.ms, 10)) {
+                throw Error(`ms (${result.duration.ms}) and sec (${result.duration.sec}) are not equal.`);
+            }
         });
         message(test, true);
     }
@@ -73,31 +77,15 @@ async function main() {
         console.error(err);
         message(test, false);
     }
-    test += 1;
+    test = 4;
     try {
         const timeout = 1000;
-        const stopWatch = new index_1.StopWatch('title');
+        const stopWatch = new index_1.default('title');
         stopWatch.start('name');
         await sleep(timeout);
         stopWatch.stop((result) => {
             if (!isEqual(timeout, result.duration.ms, 15))
-                throw Error('meassured time is not right.');
-        });
-        message(test, true);
-    }
-    catch (err) {
-        console.error(err);
-        message(test, false);
-    }
-    test += 1;
-    try {
-        const timeout = 1000;
-        const stopWatch = new index_1.StopWatch('title', { showErrors: true });
-        stopWatch.start('name');
-        await sleep(timeout);
-        stopWatch.stop((result) => {
-            if (!isEqual(timeout, result.duration.ms, 15))
-                throw Error('meassured time is not right.');
+                throw Error('meassured time is not correct.');
         });
         message(test, true);
     }

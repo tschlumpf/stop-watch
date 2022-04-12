@@ -4,6 +4,7 @@ export type StopwatchResult = {
   duration: {
     sec: number,
     ms: number,
+    ns: number,
   },
 }
 
@@ -25,7 +26,7 @@ class StopWatch {
 
   name: string;
 
-  startTime: Date | null | undefined;
+  startTime: bigint | null | undefined;
 
   constructor(title: string, options?: StopwatchCallback | Partial<StopwatchOptions>) {
     if (typeof (title) !== 'string') throw new Error('no title was given.');
@@ -47,7 +48,8 @@ class StopWatch {
     if (this.startTime && this.showErrors) {
       throw new Error('stopwatch is started although it is already running. it will be restarted.');
     }
-    this.startTime = new Date();
+    // this.startTime = new Date();
+    this.startTime = process.hrtime.bigint();
   }
 
   stopStart(name: string, callback?: StopwatchCallback) {
@@ -63,15 +65,16 @@ class StopWatch {
       return;
     }
 
-    const duration = new Date().getTime() - this.startTime.getTime();
+    const duration = process.hrtime.bigint() - this.startTime;
     this.startTime = null;
 
     const result: StopwatchResult = {
       title: this.title,
       name: this.name,
       duration: {
-        sec: duration / 1000,
-        ms: duration,
+        sec: Number(duration / 1000_000_000n),
+        ms: Number(duration / 1000_000n),
+        ns: Number(duration),
       },
     };
 
@@ -89,5 +92,4 @@ class StopWatch {
   }
 }
 
-// eslint-disable-next-line import/prefer-default-export
-export { StopWatch };
+export default StopWatch;

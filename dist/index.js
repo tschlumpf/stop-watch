@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.StopWatch = void 0;
 class StopWatch {
     title;
     defaultCallback;
@@ -26,7 +25,8 @@ class StopWatch {
         if (this.startTime && this.showErrors) {
             throw new Error('stopwatch is started although it is already running. it will be restarted.');
         }
-        this.startTime = new Date();
+        // this.startTime = new Date();
+        this.startTime = process.hrtime.bigint();
     }
     stopStart(name, callback) {
         if (typeof (name) !== 'string')
@@ -40,14 +40,15 @@ class StopWatch {
                 throw new Error('the stopwatch was stopped but never started.');
             return;
         }
-        const duration = new Date().getTime() - this.startTime.getTime();
+        const duration = process.hrtime.bigint() - this.startTime;
         this.startTime = null;
         const result = {
             title: this.title,
             name: this.name,
             duration: {
-                sec: duration / 1000,
-                ms: duration,
+                sec: Number(duration / 1000000000n),
+                ms: Number(duration / 1000000n),
+                ns: Number(duration),
             },
         };
         if (typeof (callback) === 'function') {
@@ -62,4 +63,4 @@ class StopWatch {
         console.log(`${result.title} - '${result.name}' took ${result.duration.sec}s`);
     }
 }
-exports.StopWatch = StopWatch;
+exports.default = StopWatch;

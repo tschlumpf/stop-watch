@@ -4,6 +4,7 @@ export declare type StopwatchResult = {
     duration: {
         sec: number;
         ms: number;
+        ns: number;
     };
 };
 export interface StopwatchCallback {
@@ -18,11 +19,11 @@ declare class StopWatch {
     defaultCallback: StopwatchCallback | undefined;
     showErrors: boolean;
     name: string;
-    startTime: Date | null | undefined;
+    startTime: bigint | null | undefined;
     constructor(title: string, options?: StopwatchCallback | Partial<StopwatchOptions>);
     start(name: string): void;
     stopStart(name: string, callback?: StopwatchCallback): void;
     stop(callback?: StopwatchCallback): void;
 }
-export { StopWatch };
+export default StopWatch;
 //# sourceMappingURL=index.d.ts.map
